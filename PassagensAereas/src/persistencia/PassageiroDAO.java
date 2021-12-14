@@ -69,7 +69,7 @@ public class PassageiroDAO {
 			
 			
 		} catch (Exception e) {
-			throw new InsertException("Nao foi possivel inserir a consulta");
+			throw new InsertException("Nao foi possivel inserir a passageiro");
 		}
 	}
 	
@@ -78,7 +78,7 @@ public class PassageiroDAO {
 			delete.setInt(1, passageiro.getCod_p());
 			delete.executeUpdate();
 		} catch (SQLException e) {
-			throw new DeleteException("Erro ao deletar consulta");
+			throw new DeleteException("Erro ao deletar passageiro");
 		}
 		
 	}	
@@ -97,7 +97,7 @@ public class PassageiroDAO {
 			return passageiros;
 			
 		} catch (SQLException e) {
-			throw new SelectException("Nao foi possivel encontrar a consulta");
+			throw new SelectException("Nao foi possivel encontrar o passageiro");
 		}
 		
 	}
@@ -109,7 +109,7 @@ public class PassageiroDAO {
 			update.executeUpdate();
 	
 		} catch (SQLException e) {
-			throw new UpdateException("Nao foi possivel atualizar consulta");
+			throw new UpdateException("Nao foi possivel atualizar passageiro");
 		}
 		
 	}
@@ -130,7 +130,7 @@ public class PassageiroDAO {
 			return passageiro;
 			
 		} catch (SQLException e) {
-			throw new SelectException("Nao foi possivel encontrar o paciente");
+			throw new SelectException("Nao foi possivel encontrar o passageiro");
 		}
 	}
 	

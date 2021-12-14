@@ -43,4 +43,103 @@ public class ReservaDAO {
 		}
 		return instance;
 	}
+	
+	public int newId()throws SelectException{
+		try {
+			ResultSet rs=newId.executeQuery();
+			if(rs.next()) {
+				return rs.getInt(1);
+			}
+			else {
+				return 0;
+			}
+		} catch (SQLException e) {
+			throw new SelectException("Nao foi possivel criar novo id");
+		}
+	}
+	
+	public void insert(Reserva reserva)throws InsertException{
+		try {
+			
+			insert.setInt(1, newId());
+			insert.setString(2, reserva.getDta_validade());
+			insert.setInt(3,reserva.getCod_voo());
+			insert.setInt(4, reserva.getCod_p());
+			
+			insert.executeUpdate();
+			
+			
+		} catch (Exception e) {
+			throw new InsertException("Nao foi possivel inserir a reserva");
+		}
+	}
+	
+	public void delete(Reserva reserva)throws DeleteException{
+		try {
+			delete.setInt(1, reserva.getCod_res());
+			delete.executeUpdate();
+		} catch (SQLException e) {
+			throw new DeleteException("Erro ao deletar reserva");
+		}
+		
+	}	
+	
+	public List<Reserva> selectAll() throws SelectException {
+		List<Reserva> reservas=new ArrayList<Reserva>();
+		Reserva reserva=null;
+		try {
+			ResultSet rs=selectAll.executeQuery();
+			while(rs.next()) {
+				reserva=new Reserva();
+				reserva.setCod_res(rs.getInt("cod_res"));
+				reserva.setDta_validade(rs.getString("prazo_validade"));
+				reserva.setCod_voo(rs.getInt("cod_voo"));
+				reserva.setCod_p(rs.getInt("cod_p"));
+				reservas.add(reserva);
+			}
+			return reservas;
+			
+		} catch (SQLException e) {
+			throw new SelectException("Nao foi possivel encontrar a reserva");
+		}
+		
+	}
+	
+	public void update(Reserva reserva)throws UpdateException{
+		try {
+			update.setString(1, reserva.getDta_validade());
+			update.setInt(2, reserva.getCod_voo());
+			update.setInt(3, reserva.getCod_p());
+			update.setInt(4, reserva.getCod_res());
+			update.executeUpdate();
+	
+		} catch (SQLException e) {
+			throw new UpdateException("Nao foi possivel atualizar reserva");
+		}
+		
+	}
+	
+	public Reserva select(int cod) throws SelectException {
+		Reserva reserva=null;
+		
+		try {
+			select.setInt(1, cod);
+			ResultSet rs=select.executeQuery();
+			if(rs.next()) {
+				reserva=new Reserva();
+				reserva.setCod_res(rs.getInt("cod_res"));
+				reserva.setDta_validade(rs.getString("prazo_validade"));
+				reserva.setCod_voo(rs.getInt("cod_voo"));
+				reserva.setCod_p(rs.getInt("cod_p"));
+				
+			}
+			return reserva;
+			
+		} catch (SQLException e) {
+			throw new SelectException("Nao foi possivel encontrar a reserva");
+		}
+	}
+	
+	
+	
 }

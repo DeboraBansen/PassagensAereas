@@ -26,6 +26,7 @@ public class Conexao {
 				conexao =DriverManager.getConnection(url, username, senha);
 			}
 			catch(SQLException e){
+				System.out.print("erro ao acessar o banco");
 				e.printStackTrace();
 			}
 			catch(ClassNotFoundException e1) {

@@ -43,4 +43,103 @@ public class VoosDAO {
 		}
 		return instance;
 	}
+	
+	public int newId()throws SelectException{
+		try {
+			ResultSet rs=newId.executeQuery();
+			if(rs.next()) {
+				return rs.getInt(1);
+			}
+			else {
+				return 0;
+			}
+		} catch (SQLException e) {
+			throw new SelectException("Nao foi possivel criar novo id");
+		}
+	}
+	
+	public void insert(Voos voo)throws InsertException{
+		try {
+			
+			insert.setInt(1, newId());
+			insert.setString(2, voo.getClasse());
+			insert.setInt(3,voo.getCod_dtHora());
+			insert.setInt(4, voo.getCod_trecho());
+			
+			insert.executeUpdate();
+			
+			
+		} catch (Exception e) {
+			throw new InsertException("Nao foi possivel inserir o voo");
+		}
+	}
+	
+	public void delete(Voos voo)throws DeleteException{
+		try {
+			delete.setInt(1, voo.getCodVoo());
+			delete.executeUpdate();
+		} catch (SQLException e) {
+			throw new DeleteException("Erro ao deletar o voo");
+		}
+		
+	}	
+	
+	public List<Voos> selectAll() throws SelectException {
+		List<Voos> voos=new ArrayList<Voos>();
+		Voos voo=null;
+		try {
+			ResultSet rs=selectAll.executeQuery();
+			while(rs.next()) {
+				voo=new Voos();
+				voo.setCodVoo(rs.getInt("cod_voo"));
+				voo.setClasse(rs.getString("classe"));
+				voo.setCod_dtHora(rs.getInt("cod"));
+				voo.setCod_trecho(rs.getInt("cod_trecho"));
+				voos.add(voo);
+			}
+			return voos;
+			
+		} catch (SQLException e) {
+			throw new SelectException("Nao foi possivel encontrar o voo");
+		}
+		
+	}
+	
+	public void update(Voos voo)throws UpdateException{
+		try {
+			update.setString(1, voo.getClasse());
+			update.setString(2, voo.getClasse());
+			update.setInt(3, voo.getCod_dtHora());
+			update.setInt(4, voo.getCod_trecho());
+			update.executeUpdate();
+	
+		} catch (SQLException e) {
+			throw new UpdateException("Nao foi possivel atualizar o voo");
+		}
+		
+	}
+	
+	public Voos select(int cod) throws SelectException {
+		Voos voo=null;
+		
+		try {
+			select.setInt(1, cod);
+			ResultSet rs=select.executeQuery();
+			if(rs.next()) {
+				voo=new Voos();
+				voo.setCodVoo(rs.getInt("cod_voo"));
+				voo.setClasse(rs.getString("classe"));
+				voo.setCod_dtHora(rs.getInt("cod"));
+				voo.setCod_trecho(rs.getInt("cod_trecho"));
+				
+			}
+			return voo;
+			
+		} catch (SQLException e) {
+			throw new SelectException("Nao foi possivel encontrar o voo");
+		}
+	}
+	
+	
+	
 }

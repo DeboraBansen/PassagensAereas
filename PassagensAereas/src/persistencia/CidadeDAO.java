@@ -72,7 +72,7 @@ public class CidadeDAO {
 			
 			
 		} catch (Exception e) {
-			throw new InsertException("Nao foi possivel inserir a consulta");
+			throw new InsertException("Nao foi possivel inserir a cidade");
 		}
 	}
 	
@@ -81,7 +81,7 @@ public class CidadeDAO {
 			delete.setInt(1, cidade.getCod_cid());
 			delete.executeUpdate();
 		} catch (SQLException e) {
-			throw new DeleteException("Erro ao deletar consulta");
+			throw new DeleteException("Erro ao deletar a cidade");
 		}
 		
 	}	
@@ -102,7 +102,7 @@ public class CidadeDAO {
 			return cidades;
 			
 		} catch (SQLException e) {
-			throw new SelectException("Nao foi possivel encontrar a consulta");
+			throw new SelectException("Nao foi possivel encontrar a cidade");
 		}
 		
 	}
@@ -116,7 +116,7 @@ public class CidadeDAO {
 			update.executeUpdate();
 	
 		} catch (SQLException e) {
-			throw new UpdateException("Nao foi possivel atualizar consulta");
+			throw new UpdateException("Nao foi possivel atualizar cidade");
 		}
 		
 	}
@@ -139,7 +139,7 @@ public class CidadeDAO {
 			return cidade;
 			
 		} catch (SQLException e) {
-			throw new SelectException("Nao foi possivel encontrar o paciente");
+			throw new SelectException("Nao foi possivel encontrar a cidade");
 		}
 	}
 	

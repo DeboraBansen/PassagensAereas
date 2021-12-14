@@ -7,7 +7,7 @@ public class Voos {
 	private int cod_dtHora;
 	private int cod_trecho;
 	
-	public int getVoo() {
+	public int getCodVoo() {
 		return cod_voo;
 	}
 	public String getClasse() {
@@ -20,7 +20,7 @@ public class Voos {
 		return cod_trecho;
 	}
 	
-	public void setVoo(int cod_voo) {
+	public void setCodVoo(int cod_voo) {
 		this.cod_voo=cod_voo;
 	}
 	public void setClasse(String classe) {
