@@ -44,7 +44,7 @@ public class Sistema {
 		}
 		return instance;
 	}
-	
+	//hswyqft
 	public void inserirAeronave(Aeronave p)throws InsertException,SelectException{
 		aeronaveDAO.insert(p);
 	}
